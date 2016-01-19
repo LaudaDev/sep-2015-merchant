@@ -1,2 +1,2 @@
-# sep-2015-merchant
-SEP 2015 - Merchant backend application
+# sep-2015-bank-acquirer
+SEP 2015 - Bank Acquirer REST
