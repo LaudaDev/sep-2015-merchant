@@ -1,8 +1,11 @@
 package bank.acquirer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import bank.acquirer.config.PccApiProperties;
 
 /**
  * This configuration class has three responsibilities:
@@ -18,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableAutoConfiguration
+@EnableConfigurationProperties(PccApiProperties.class)
 @ComponentScan
 public class BankAppConfig {
 	
