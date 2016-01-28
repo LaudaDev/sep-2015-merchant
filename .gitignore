@@ -42,3 +42,5 @@ Thumbs.db
 **/.project
 **/.settings/*
 /target/
+/.apt_generated/
+.factorypath
