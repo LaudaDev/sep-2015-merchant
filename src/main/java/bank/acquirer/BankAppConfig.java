@@ -1,7 +1,9 @@
 package bank.acquirer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,8 +25,17 @@ import bank.acquirer.config.PccApiProperties;
 @EnableAutoConfiguration
 @EnableConfigurationProperties(PccApiProperties.class)
 @ComponentScan
-public class BankAppConfig {
+public class BankAppConfig extends SpringBootServletInitializer {
 	
+	/**
+	 * This makes use of Spring Framework’s Servlet 3.0 support and allows 
+	 * to configure application when it’s launched by the servlet container.
+	 */
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(BankAppConfig.class);
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(BankAppConfig.class, args);
 	}
