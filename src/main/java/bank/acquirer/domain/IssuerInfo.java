@@ -2,30 +2,36 @@ package bank.acquirer.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public final class IssuerInfo {
 
-	private Long orderId;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm:ss", timezone = "CET")
+	@NotNull
+	private Integer orderId;
+
+	@JsonFormat(
+			shape = JsonFormat.Shape.STRING, 
+			pattern = "dd.MM.yyyy HH:mm:ss", 
+			timezone = "CET")
 	private Date timestamp;
 
 	public IssuerInfo() {
 
 	}
 
-	public IssuerInfo(Long orderId, Date timestamp) {
+	public IssuerInfo(Integer orderId, Date timestamp) {
 		super();
 		this.orderId = orderId;
 		this.timestamp = timestamp;
 	}
 
-	public Long getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Long orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 
@@ -39,8 +45,7 @@ public final class IssuerInfo {
 
 	@Override
 	public String toString() {
-		return "IssuerInfo [orderId=" + orderId + ", timestamp=" + timestamp
-				+ "]";
+		return "IssuerInfo [orderId=" + orderId + ", timestamp=" + timestamp + "]";
 	}
 
 }

@@ -13,7 +13,7 @@ public class TransactionsUtil {
 		TransactionRequest transactionRequest;
 		
 		CardInfo cardInfo = new CardInfo("123456789", 2, "Marko Markovic", "10/2016");
-		AcquirerInfo acquirerInfo = new AcquirerInfo(100L, new Date());
+		AcquirerInfo acquirerInfo = new AcquirerInfo(100, new Date());
 		
 		transactionRequest = new TransactionRequest(cardInfo, acquirerInfo, new BigDecimal(1000));
 		

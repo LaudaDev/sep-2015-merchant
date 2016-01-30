@@ -2,12 +2,24 @@ package bank.acquirer.domain;
 
 import java.math.BigDecimal;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public final class TransactionRequest {
-
+	
+	public static final int MIN_TRANSACTION_AMOUNT = 100;
+	
+	@NotNull
+	@Valid
 	private CardInfo cardInfo;
-
+	
+	@NotNull
+	@Valid
 	private AcquirerInfo acquirerInfo;
-
+	
+	@NotNull
+	@Min(value = MIN_TRANSACTION_AMOUNT)
 	private BigDecimal transactionAmount;
 
 	public TransactionRequest() {

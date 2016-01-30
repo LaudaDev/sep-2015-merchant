@@ -1,13 +1,37 @@
 package bank.acquirer.domain;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public final class CardInfo {
-
+	
+	public static final int LENGTH_PAN = 16;
+	public static final int MIN_SECURITY_CODE = 100;
+	public static final int MAX_SECURITY_CODE = 999;
+	public static final int MIN_HOLDER_NAME = 2; 
+	public static final int MAX_HOLDER_NAME = 100; 
+	public static final int MIN_EXPIRATION_DATE = 5; 
+	public static final int MAX_EXPIRATION_DATE = 10; 
+	
+	@NotEmpty
+	@Length(min = LENGTH_PAN, max = LENGTH_PAN)
 	private String pan;
-
-	private int securityCode;
-
+	
+	@NotNull
+	@Min(value = MIN_SECURITY_CODE)
+	@Max(value = MAX_SECURITY_CODE)
+	private Integer securityCode;
+	
+	@NotEmpty
+	@Length(min = MIN_HOLDER_NAME, max = MAX_HOLDER_NAME)
 	private String holderName;
-
+	
+	@NotEmpty
+	@Length(min = MIN_EXPIRATION_DATE, max = MAX_EXPIRATION_DATE)
 	private String expirationDate;
 
 	public CardInfo() {
@@ -31,11 +55,11 @@ public final class CardInfo {
 		this.pan = pan;
 	}
 
-	public int getSecurityCode() {
+	public Integer getSecurityCode() {
 		return securityCode;
 	}
 
-	public void setSecurityCode(int securityCode) {
+	public void setSecurityCode(Integer securityCode) {
 		this.securityCode = securityCode;
 	}
 
