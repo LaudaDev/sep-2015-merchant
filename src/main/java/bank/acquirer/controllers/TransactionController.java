@@ -1,5 +1,7 @@
 package bank.acquirer.controllers;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +23,18 @@ public class TransactionController {
 	@Autowired
 	private PccLookupService pccLookupService;
 	
-	@RequestMapping(value = "/auth", 
-			method = RequestMethod.POST)
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public TransactionResponse processTransaction(
+			@Valid
 			@RequestBody TransactionRequest transactionRequest) {
 
-		LOGGER.info("Received transaction request : {}", transactionRequest);
+		LOGGER.info("Received transaction request: {}", transactionRequest);
 		
-		TransactionResponse response = 
+		TransactionResponse transactionResponse = 
 				pccLookupService.postForTransactionResponse(transactionRequest);
 		
-		return response;
+		return transactionResponse;
 	}
+
 }
+

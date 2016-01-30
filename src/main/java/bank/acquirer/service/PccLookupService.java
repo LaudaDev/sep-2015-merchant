@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import bank.acquirer.config.PccApiProperties;
 import bank.acquirer.domain.TransactionRequest;
 import bank.acquirer.domain.TransactionResponse;
+import bank.acquirer.domain.TransactionStatus;
 
 @Service
 public class PccLookupService {
@@ -19,19 +20,39 @@ public class PccLookupService {
 	@Autowired
 	private PccApiProperties pccApiProperties;
 	
-	final RestTemplate restTemplate = new RestTemplate();
-	
+	private final RestTemplate restClient = new RestTemplate();
+
 	public TransactionResponse postForTransactionResponse(TransactionRequest request) {
+		
 		String requestUrl = pccApiProperties.getBaseUrl() + pccApiProperties.getResourceName();
 		
 		LOGGER.info("Forwarding transaction request to PCC api : {}", requestUrl);
 		
-		TransactionResponse response = restTemplate.postForObject(
-				requestUrl, request, TransactionResponse.class);
+		TransactionResponse transactionResponse;
+		try {
+			transactionResponse = 
+					restClient.postForObject(requestUrl, request, TransactionResponse.class);
+		} catch (Exception e) {
+			LOGGER.debug("Exception thrown while posting to PCC: {}", e.getMessage());
+			
+			transactionResponse = createTransactionResponseWithServerError();
+		}
 		
-		LOGGER.info("Response from PCC api: {}", response);
+		LOGGER.info("Response from PCC api: {}", transactionResponse);
 		
-		return response;
+		return transactionResponse;
+	}
+	
+	private static TransactionResponse createTransactionResponseWithServerError() {
+		TransactionStatus transactionStatus = 
+				new TransactionStatus("05", "SERVER_ERROR");
+		
+		TransactionResponse transactionResponse = 
+				new TransactionResponse();
+		
+		transactionResponse.setTransactionStatus(transactionStatus);
+		
+		return transactionResponse;
 	}
 	
 }
