@@ -71,6 +71,11 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -96,6 +101,5 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<!-- package application for deploying on external server -->
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 </project>
