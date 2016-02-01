@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import bank.acquirer.domain.TransactionRequest;
+import bank.acquirer.dto.TransactionRequestDTO;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,7 +21,7 @@ public class JacksonMappingTests {
 	public void mapTransactionRequestToJson_ShouldContainAllTransactionAttributes() throws JsonProcessingException {
 
 		ObjectMapper mapper = createObjectMapper();
-		TransactionRequest request = TransactionsUtil.createValidTransactionRequest();
+		TransactionRequestDTO request = TransactionsUtil.createValidTransactionRequest();
 		
 		String requestAsJson = mapper.writeValueAsString(request);
 		
@@ -42,11 +42,11 @@ public class JacksonMappingTests {
 		InputStream inputStream = getClass().getClassLoader()
 				.getResourceAsStream("validTransactionRequest.json");
 
-		TransactionRequest transacactionRequest = null;
+		TransactionRequestDTO transacactionRequest = null;
 
 		try {
 			transacactionRequest = objectMapper.readValue(inputStream,
-					TransactionRequest.class);
+					TransactionRequestDTO.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -62,12 +62,12 @@ public class JacksonMappingTests {
 		InputStream inputStream = getClass().getClassLoader()
 				.getResourceAsStream("invalidTimestampFormatTransactionRequest.json");
 		
-		objectMapper.readValue(inputStream, TransactionRequest.class);
+		objectMapper.readValue(inputStream, TransactionRequestDTO.class);
 	}
 	
 	@Test
 	public void testMappingObjectToJson() throws JsonProcessingException {
-		TransactionRequest request = TransactionsUtil.createValidTransactionRequest();
+		TransactionRequestDTO request = TransactionsUtil.createValidTransactionRequest();
 		
 		ObjectMapper mapper = createObjectMapper();
 		

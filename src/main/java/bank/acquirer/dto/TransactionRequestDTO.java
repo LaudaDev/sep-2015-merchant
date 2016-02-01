@@ -1,4 +1,4 @@
-package bank.acquirer.domain;
+package bank.acquirer.dto;
 
 import java.math.BigDecimal;
 
@@ -6,7 +6,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public final class TransactionRequest {
+import bank.acquirer.domain.AcquirerInfo;
+import bank.acquirer.domain.CardInfo;
+
+public final class TransactionRequestDTO {
 	
 	public static final int MIN_TRANSACTION_AMOUNT = 100;
 	
@@ -22,11 +25,11 @@ public final class TransactionRequest {
 	@Min(value = MIN_TRANSACTION_AMOUNT)
 	private BigDecimal transactionAmount;
 
-	public TransactionRequest() {
+	public TransactionRequestDTO() {
 
 	}
 
-	public TransactionRequest(CardInfo cardInfo, AcquirerInfo acquirerInfo,
+	public TransactionRequestDTO(CardInfo cardInfo, AcquirerInfo acquirerInfo,
 			BigDecimal transactionAmount) {
 		super();
 		this.cardInfo = cardInfo;

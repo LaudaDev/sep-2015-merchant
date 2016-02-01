@@ -1,6 +1,10 @@
-package bank.acquirer.domain;
+package bank.acquirer.dto;
 
-public class TransactionResponse {
+import bank.acquirer.domain.AcquirerInfo;
+import bank.acquirer.domain.IssuerInfo;
+import bank.acquirer.domain.TransactionStatus;
+
+public class TransactionResponseDTO {
 
 	private AcquirerInfo acquirerInfo;
 
@@ -8,11 +12,11 @@ public class TransactionResponse {
 
 	private TransactionStatus transactionStatus;
 
-	public TransactionResponse() {
+	public TransactionResponseDTO() {
 
 	}
 
-	public TransactionResponse(AcquirerInfo acquirerInfo,
+	public TransactionResponseDTO(AcquirerInfo acquirerInfo,
 			IssuerInfo issuerInfo, TransactionStatus transactionStatus) {
 		super();
 		this.acquirerInfo = acquirerInfo;
