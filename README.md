@@ -27,7 +27,7 @@ Acquirer bank REST api using Spring Boot
     </pre>
 ## API URLs
 
-- baseUrl: *https://host:port/api/bank/acquirer*
+- baseUrl: *https://host:port/api/acquirer/bank*
 - Supported HTTP methods:
   * POST _baseUrl/auth_
     - Request body format example:
