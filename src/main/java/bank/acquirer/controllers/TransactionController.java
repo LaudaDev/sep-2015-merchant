@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import bank.acquirer.domain.TransactionRequest;
-import bank.acquirer.domain.TransactionResponse;
+import bank.acquirer.dto.TransactionRequestDTO;
+import bank.acquirer.dto.TransactionResponseDTO;
 import bank.acquirer.service.PccLookupService;
+import bank.acquirer.service.TransactionLogService;
 
 @RestController
-@RequestMapping("/api/bank/acquirer")
+@RequestMapping("/transaction")
 public class TransactionController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TransactionController.class);
@@ -23,18 +24,23 @@ public class TransactionController {
 	@Autowired
 	private PccLookupService pccLookupService;
 	
+	@Autowired
+	private TransactionLogService transactionLogService;
+	
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
-	public TransactionResponse processTransaction(
+	public TransactionResponseDTO processTransaction(
 			@Valid
-			@RequestBody TransactionRequest transactionRequest) {
+			@RequestBody TransactionRequestDTO transactionRequest) {
 
 		LOGGER.info("Received transaction request: {}", transactionRequest);
 		
-		TransactionResponse transactionResponse = 
+		TransactionResponseDTO transactionResponse = 
 				pccLookupService.postForTransactionResponse(transactionRequest);
+		
+		transactionLogService.createTransactionLog(transactionRequest, transactionResponse);
 		
 		return transactionResponse;
 	}
-
+	
 }
 
