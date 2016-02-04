@@ -3,15 +3,12 @@ package bank.acquirer.dto;
 import java.math.BigDecimal;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import bank.acquirer.domain.AcquirerInfo;
 import bank.acquirer.domain.CardInfo;
 
 public final class TransactionRequestDTO {
-	
-	public static final int MIN_TRANSACTION_AMOUNT = 100;
 	
 	@NotNull
 	@Valid
@@ -22,7 +19,6 @@ public final class TransactionRequestDTO {
 	private AcquirerInfo acquirerInfo;
 	
 	@NotNull
-	@Min(value = MIN_TRANSACTION_AMOUNT)
 	private BigDecimal transactionAmount;
 
 	public TransactionRequestDTO() {
